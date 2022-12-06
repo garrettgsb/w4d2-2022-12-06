@@ -25,6 +25,13 @@
 </head>
 <body>
   <script>
+    const product = {
+      name: 'Bluetooth mouse',
+      price: 50.00,
+      description: 'It is a mouse that you use for pointing at things',
+      img: 'website.com/images/bluetoothmouse.png',
+    }
+
     const vampireTree = {
       name: 'Root',
       children: [
@@ -92,23 +99,17 @@
       ]
     };
 
-    function createVampire(name) {
-      const element = document.createElement('div')
-      const content = `🧛‍♀️ <span class='vampire-name'>${name}</span>`
-      element.innerHTML = content;
-      return element;
-    }
-
     function buildVampireTree(node) {
-      const element = createVampire(node.name);
+      const element = document.createElement('div');
+      element.innerHTML = `🧛‍♂️ <span class='vampire-name'>${node.name}</span>`;
       node.children?.forEach(child => {
-        setTimeout(() => element.appendChild(buildVampireTree(child)), 2000);
+        const childElement = buildVampireTree(child);
+        element.append(childElement);
       });
       return element;
     }
-
-    const vampireNodeTree = buildVampireTree(vampireTree);
-    document.querySelector('body').appendChild(vampireNodeTree);
+    const body = document.body;
+    body.append(buildVampireTree(vampireTree));
   </script>
 </body>
 </html>
